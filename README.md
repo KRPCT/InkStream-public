@@ -1,89 +1,130 @@
-# InkStream / 墨流
+# InkStream
 
-> 文本编辑器中的 IntelliJ IDE — 原生支持多语法（Obsidian Markdown / LaTeX / Typst / 富文本）、原生 Git 版本管理（深度定制 git-graph + GitHub）、原生 Zotero 引用、原生 Obsidian 关系网络。
+InkStream 是一款本地优先的桌面 Markdown 编辑器，面向长文写作、技术笔记、数学内容和多格式文档导出。它提供接近 Typora 的原位预览体验，同时保留 Markdown 源文本作为文件内容，方便长期保存、版本管理和跨工具迁移。
 
-## 产品契约
+## 产品定位
 
-- 根契约：[`ORACLE.md`](../ORACLE.md) — 单一裁决源。任何其他文档与之冲突以 ORACLE 为准。
-- 需求拆解：[`PRD.md`](../PRD.md)
-- 视觉契约：[`UI-SPEC.md`](../UI-SPEC.md)
-- 版本路线：[`ROADMAP.md`](../ROADMAP.md)
-- 视觉 mockup：[`mockups/oracle-v0.1.html`](../mockups/oracle-v0.1.html)
+- 本地文件优先：文档默认打开、编辑、保存到本机。
+- 所见即所得式 Markdown：在编辑器中直接显示标题、表格、链接、代码块和数学公式的预览效果。
+- 数学与技术写作：支持行内公式、块级公式、LaTeX 片段和 Typst 片段。
+- 文档导入导出：内置 Pandoc，用于导入和导出常见文档格式。
+- 桌面应用体验：包含欢迎页、标签页、文件树、大纲、设置、命令面板和右键菜单。
 
-## 当前版本
+## 已支持能力
 
-`v0.1` — Tiptap 骨架已冻结（commit `34f18f3`），即将被 v0.2 推翻。
+| 模块 | 状态 | 说明 |
+| --- | --- | --- |
+| 桌面客户端 | [x] | 基于 Tauri 的桌面应用，可打包发布。 |
+| 欢迎页 | [x] | 新建文件、打开文件、打开文件夹、最近项目、设置入口。 |
+| 文件编辑 | [x] | 标签页、脏状态、保存、另存为、最近文件。 |
+| 文件树 | [x] | 打开文件夹、浏览文件、搜索文件、切换文档。 |
+| 文档大纲 | [x] | 提取标题结构并支持点击跳转。 |
+| 实时预览 | [x] | Markdown 内容可在原位显示渲染结果。 |
+| 源码模式 | [x] | 可切换到 Markdown 源码编辑。 |
+| 表格 | [x] | 支持表格预览、单元格内 Markdown 渲染和回源编辑。 |
+| 超链接 | [x] | 渲染状态下可点击跳转。 |
+| 代码块 | [x] | 支持代码块显示与代码语言识别。 |
+| 数学公式 | [x] | 支持 `$...$`、`$$...$$` 和 fenced `math` 块。 |
+| LaTeX 片段 | [x] | 支持 fenced `latex` 块预览。 |
+| Typst 片段 | [x] | 支持 fenced `typst` 块预览和暗色模式适配。 |
+| 命令面板 | [x] | 支持常用编辑与插入命令。 |
+| 右键菜单 | [x] | 支持复制、粘贴、插入、段落格式和字体格式。 |
+| 设置页 | [x] | 支持主题、编辑器、Markdown/数学、导出和快捷键设置。 |
+| Pandoc 检测 | [x] | 优先使用内置 Pandoc，也支持自定义路径和系统 PATH。 |
+| Pandoc 导入 | [x] | 支持将常见文档格式导入为 Markdown。 |
+| Pandoc 导出 | [x] | 支持 Markdown、HTML、PDF、DOCX、RTF、EPUB、LaTeX、Typst。 |
 
-`v0.2`（进行中）— 视觉与内核重铸：抛弃 Tiptap，接入 CodeMirror 6 单内核 + Atom HSL × Obsidian 变量名视觉体系。详见 [ROADMAP.md](../ROADMAP.md#v02--视觉与内核重铸当前周期)。
+## TODO
 
-## 技术栈
+| 功能 | 状态 | 说明 |
+| --- | --- | --- |
+| 图片拖放与嵌入 | [ ] | 支持本地图片插入、复制粘贴和资源管理。 |
+| 脚注 | [ ] | 支持 Markdown 脚注渲染与编辑。 |
+| Wiki 链接与反向链接 | [ ] | 支持 `[[page]]` 风格链接和引用追踪。 |
+| 引文管理 | [ ] | 接入 Zotero 引文库和引用插入。 |
+| 知识图谱 | [ ] | 基于文档链接与引用关系生成图谱。 |
+| Git 图谱 | [ ] | 在左侧栏展示真实提交图和文件变更。 |
+| 版本对比 | [ ] | 支持面向文字写作的差异查看。 |
+| 协作发布 | [ ] | 支持更完整的导出模板和发布预设。 |
 
-| 层 | 技术 |
-|----|------|
-| 桌面壳 | Tauri 2 |
-| 前端 | React 19 + TypeScript strict + Vite |
-| 状态 | Zustand 5 |
-| 样式 | Tailwind 4 + 原生 CSS 变量 |
-| 编辑器内核 | CodeMirror 6 + `@lezer/markdown` |
-| 数学 | KaTeX |
-| Typst | `@myriaddreamin/typst.ts` (wasm) |
-| Git | `git2` (libgit2 Rust binding) |
-| GitHub | `@octokit/rest` + `@octokit/auth-oauth-device` |
-| 全文索引 | SQLite FTS5 |
+## Markdown 能力清单
 
-## 运行
+| 内容 | 状态 |
+| --- | --- |
+| H1-H6 标题 | [x] |
+| 普通段落 | [x] |
+| 加粗、斜体、下划线、删除线 | [x] |
+| 高亮、行内代码 | [x] |
+| 引用块 | [x] |
+| 无序列表、有序列表、任务列表 | [x] |
+| 表格 | [x] |
+| 超链接 | [x] |
+| 代码块 | [x] |
+| 行内公式 | [x] |
+| 块级公式 | [x] |
+| fenced `math` 块 | [x] |
+| fenced `latex` 块 | [x] |
+| fenced `typst` 块 | [x] |
+| YAML frontmatter 语言识别 | [x] |
+| 图片 | [ ] |
+| 脚注 | [ ] |
+| Wiki 链接 | [ ] |
+| 引文 | [ ] |
+
+## 源码编译
+
+需要准备：
+
+- Node.js 22 或更新版本
+- pnpm 10.x
+- Rust stable toolchain
+- Windows WebView2 Runtime
+- Git LFS
+
+安装依赖：
 
 ```bash
-# 安装依赖（pnpm 10.x，锁定版本由 pnpm-lock.yaml 提供）
-pnpm install
+pnpm install --frozen-lockfile
+```
 
-# 开发模式（Tauri dev server）
+启动桌面客户端：
+
+```bash
 pnpm tauri dev
+```
 
-# 构建发布版
+构建桌面安装包：
+
+```bash
 pnpm tauri build
 ```
 
-## 目录结构
+## 目录说明
 
-```
-inkstream/
-├── src/                      # 前端 (React + CodeMirror 6)
-│   ├── components/
-│   │   ├── app/              # MenuBar / StatusBar / WelcomePage
-│   │   ├── layout/           # Sidebar / EditorArea / RightPanel
-│   │   ├── academic/         # CitationPanel / LibraryTree / AcademicToolbar
-│   │   ├── creative/         # ChapterNav / CodexPanel / SceneSummaryCard
-│   │   ├── git/              # GitGraphView (v0.4)
-│   │   ├── graph/            # GraphView (v0.5)
-│   │   ├── command/          # CommandPalette
-│   │   └── settings/         # SettingsDialog
-│   ├── editor/               # CodeMirror 6 扩展 (v0.2 新增)
-│   │   ├── livepreview/
-│   │   ├── fenced-block/     # math / typst / latex (v0.3)
-│   │   └── wiki-link/        # [[ ]] 双向链接 (v0.5)
-│   ├── stores/               # Zustand store
-│   ├── styles/               # theme.css (v0.2 新增)
-│   ├── types/                # 共享 TypeScript 类型
-│   └── mock/                 # 开发期 mock 数据
-└── src-tauri/                # Rust 后端
-    ├── src/
-    │   ├── lib.rs            # Tauri builder + commands 注册
-    │   ├── git/              # git2 wrapper (v0.4)
-    │   ├── zotero/           # CAYW + Web API client (v0.6)
-    │   ├── index/            # SQLite FTS5 (v0.5)
-    │   └── prose_diff/       # 句级 LCS (v0.7)
-    ├── capabilities/         # Tauri 2 permissions (v0.2 新增)
-    └── Cargo.toml
+```text
+.
+├── public/                  # 静态资源和 Typst 预览字体
+├── src/                     # 客户端界面、编辑器、服务和状态管理
+├── src-tauri/               # 桌面后端、应用配置、图标和内置资源
+├── package.json             # 前端依赖和应用脚本
+├── pnpm-lock.yaml           # 前端依赖锁文件
+└── vite.config.ts           # 前端构建配置
 ```
 
-## 开发工作流
+## 内置 Pandoc
 
-1. 任何 phase 工作前先读 [ORACLE.md](../ORACLE.md)。
-2. 使用 GSD 工作流：`/gsd-new-milestone` → `/gsd-spec-phase` → `/gsd-discuss-phase` → `/gsd-plan-phase` → `/gsd-execute-phase` → `/gsd-verify-work`。
-3. 提交前 `pnpm check:all`（lint + typecheck + test）。
-4. Conventional Commits，SSH 签名（Verified 硬门）。
+InkStream 内置 Pandoc，用于本地文档导入和导出。该文件通过 Git LFS 管理：
+
+```text
+src-tauri/resources/pandoc/pandoc.exe
+```
+
+克隆仓库后，如果该文件显示为 LFS 指针，请执行：
+
+```bash
+git lfs pull
+```
 
 ## License
 
-待定（参考 ORACLE.md 决议）。
+License 尚未确定。
