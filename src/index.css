@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-ui);
+  color: var(--text-normal);
+  background-color: var(--background-primary);
+}
+

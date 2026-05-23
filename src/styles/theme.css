@@ -1,0 +1,183 @@
+/* ===== InkStream Theme System — ORACLE §5 Visual Contract ===== */
+/* Atom one-light/one-dark HSL 6-hue palette + Obsidian variable names */
+/* Selectors: .theme-light / .theme-dark (not .dark) */
+/* Mode accent override: body[data-mode="standard|academic|creative"] */
+
+/* ===== Light Theme: Atom one-light HSL ===== */
+.theme-light {
+  /* Surface colors */
+  --background-primary: hsl(220, 23%, 95%);   /* one-light bg */
+  --background-secondary: hsl(220, 16%, 91%); /* sidebar */
+  --background-modifier-border: hsl(220, 13%, 82%);
+  --background-modifier-hover: hsl(220, 14%, 88%);
+  --background-modifier-active: hsl(220, 16%, 85%);
+
+  /* Text colors */
+  --text-normal: hsl(220, 14%, 24%);   /* one-light fg / mono-1 */
+  --text-muted: hsl(220, 9%, 46%);     /* mono-2 */
+  --text-faint: hsl(220, 10%, 60%);    /* mono-3 / Focus mode fade */
+
+  /* Accent color (theme accent = mode accent) */
+  --accent: hsl(220, 100%, 50%);       /* default Atom hue-2 blue */
+
+  /* Syntax highlighting (Atom one-light 6-hue) */
+  --syntax-cyan:     hsl(187, 47%, 45%);
+  --syntax-blue:     hsl(207, 82%, 50%);
+  --syntax-purple:   hsl(286, 60%, 55%);
+  --syntax-green:    hsl( 95, 38%, 45%);
+  --syntax-red-1:    hsl(355, 65%, 50%);
+  --syntax-red-2:    hsl(  5, 48%, 45%);
+  --syntax-orange-1: hsl( 29, 54%, 50%);
+  --syntax-orange-2: hsl( 39, 67%, 55%);  /* CORRECTED: 55% not 45% per ORACLE §5.2 */
+}
+
+/* ===== Dark Theme: Atom one-dark HSL ===== */
+.theme-dark {
+  /* Surface colors */
+  --background-primary: hsl(220, 13%, 18%);     /* one-dark @syntax-bg */
+  --background-secondary: hsl(220, 13%, 14%);
+  --background-modifier-border: hsl(220, 13%, 26%);
+  --background-modifier-hover: hsl(220, 13%, 22%);
+  --background-modifier-active: hsl(220, 13%, 30%);
+
+  /* Text colors */
+  --text-normal: hsl(220, 14%, 71%);  /* mono-1 */
+  --text-muted: hsl(220,  9%, 55%);   /* mono-2 */
+  --text-faint: hsl(220, 10%, 40%);   /* mono-3 */
+
+  /* Accent color */
+  --accent: hsl(220, 100%, 66%);      /* Atom @syntax-accent */
+
+  /* Syntax highlighting (Atom one-dark 6-hue) */
+  --syntax-cyan:     hsl(187, 47%, 55%);
+  --syntax-blue:     hsl(207, 82%, 66%);
+  --syntax-purple:   hsl(286, 60%, 67%);
+  --syntax-green:    hsl( 95, 38%, 62%);
+  --syntax-red-1:    hsl(355, 65%, 65%);
+  --syntax-red-2:    hsl(  5, 48%, 51%);
+  --syntax-orange-1: hsl( 29, 54%, 61%);
+  --syntax-orange-2: hsl( 39, 67%, 69%);
+}
+
+/* ===== Mode Accent Override (mode accent = theme accent) ===== */
+/* Switching mode only changes --accent, no second color introduced */
+body[data-mode="standard"]  { --accent: hsl(220, 10%, 50%); } /* graphite gray */
+body[data-mode="academic"]  { --accent: hsl(220, 70%, 45%); } /* academic deep blue */
+body[data-mode="creative"]  { --accent: hsl(355, 65%, 50%); } /* cinnabar red */
+
+/* ===== Spacing Scale ===== */
+:root {
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+  --space-11: 192px;
+  --space-12: 256px;
+}
+
+/* ===== Font Stacks ===== */
+:root {
+  --font-ui: ui-sans-serif, system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-text: "Source Serif Pro", Georgia, "Songti SC", "Source Han Serif SC", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+
+/* ===== Border Radius ===== */
+:root {
+  --radius-s: 4px;   /* components */
+  --radius-m: 8px;   /* dialogs */
+  --radius-l: 12px;  /* cards */
+}
+
+/* ===== Shadows (light theme only, dark theme uses borders) ===== */
+.theme-light {
+  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-m: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.theme-dark {
+  --shadow-s: none;
+  --shadow-m: none;
+}
+
+/* ===== Tab Bar Visual Contract (ORACLE §5.3) ===== */
+/* Active tab indicated by 3-4px --accent bottom border (not color block) */
+/* No border-right separators, use padding-inline + transparent gap */
+.ink-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.ink-tabs__tab {
+  padding: 6px 12px;
+  color: var(--text-muted);
+  border-bottom: 3px solid transparent;  /* same height as active, prevent jump */
+  transition: color 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+
+.ink-tabs__tab:hover {
+  color: var(--text-normal);
+}
+
+.ink-tabs__tab--active {
+  color: var(--text-normal);
+  border-bottom-color: var(--accent);  /* 3px solid underline */
+}
+
+/* ===== Additional Obsidian-compatible Variables ===== */
+:root {
+  /* Interactive elements */
+  --interactive-normal: var(--background-modifier-hover);
+  --interactive-hover: var(--background-modifier-active);
+  --interactive-accent: var(--accent);
+  --interactive-accent-hover: var(--accent);
+
+  /* Status colors */
+  --text-success: var(--syntax-green);
+  --text-warning: var(--syntax-orange-1);
+  --text-error: var(--syntax-red-1);
+
+  /* Links */
+  --text-accent: var(--accent);
+  --text-accent-hover: var(--accent);
+
+  /* Code */
+  --code-normal: var(--text-normal);
+  --code-background: var(--background-secondary);
+
+  /* Scrollbar */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--background-modifier-border);
+  --scrollbar-active-thumb-bg: var(--background-modifier-active);
+}
+
+/* ===== Compatibility Layer: --ink-* → Obsidian Variables ===== */
+/* Maps v0.1 --ink-* variables to Phase 2 ORACLE §5 variables */
+/* This allows gradual migration of components without breaking existing code */
+.theme-light,
+.theme-dark {
+  /* Surface mappings */
+  --ink-bg: var(--background-primary);
+  --ink-surface: var(--background-secondary);
+  --ink-border: var(--background-modifier-border);
+  --ink-hover: var(--background-modifier-hover);
+  --ink-accent: var(--background-modifier-active);
+
+  /* Text mappings */
+  --ink-text: var(--text-normal);
+  --ink-text-muted: var(--text-muted);
+  --ink-text-faint: var(--text-faint);
+
+  /* Mode accent mappings (for backward compatibility) */
+  --mode-standard: hsl(220, 10%, 50%);
+  --mode-academic: hsl(220, 70%, 45%);
+  --mode-creative: hsl(355, 65%, 50%);
+}

@@ -1,0 +1,9 @@
+* text=auto eol=lf
+
+*.icns binary
+*.ico binary
+*.otf binary
+*.png binary
+*.ttf binary
+
+src-tauri/resources/pandoc/pandoc.exe filter=lfs diff=lfs merge=lfs -text
