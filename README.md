@@ -14,6 +14,16 @@ InkStream is a desktop Markdown editor that keeps your documents as plain Markdo
 
 It is designed for writers who need local files, technical formatting, and predictable export rather than a web-only note service.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/inkstream-welcome.png" alt="InkStream welcome page" width="420" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/inkstream-editor.png" alt="InkStream editor with live Markdown preview" width="720" />
+</p>
+
 ## Features
 
 | Area | Status | Notes |
@@ -89,7 +99,7 @@ Available package types:
 
 The public source mirror is available at [KRPCT/InkStream-public](https://github.com/KRPCT/InkStream-public).
 
-Only the `main` branch is mirrored. Private development and release branches remain in the private source repository.
+Only the cleaned `main` branch is mirrored. Private development and release branches remain in the private source repository.
 
 ## Build From Source
 
