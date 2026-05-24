@@ -85,6 +85,12 @@ Available package types:
 - Windows MSI: `inkstream_*_x64_en-US.msi`
 - Portable Windows build: `InkStream-*-windows-x64-portable.zip`
 
+## Public Mirror
+
+The public source mirror is available at [KRPCT/InkStream-public](https://github.com/KRPCT/InkStream-public).
+
+Only the `main` branch is mirrored. Private development and release branches remain in the private source repository.
+
 ## Build From Source
 
 Requirements:

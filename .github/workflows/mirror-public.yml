@@ -1,0 +1,33 @@
+name: Mirror main to public repository
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    if: github.repository == 'KRPCT/InkStream'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Push main to public mirror
+        env:
+          MIRROR_TOKEN: ${{ secrets.INKSTREAM_PUBLIC_MIRROR_TOKEN }}
+        run: |
+          if [ -z "$MIRROR_TOKEN" ]; then
+            echo "INKSTREAM_PUBLIC_MIRROR_TOKEN is not configured."
+            exit 1
+          fi
+          git remote add public-mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/KRPCT/InkStream-public.git"
+          git push --force public-mirror HEAD:refs/heads/main
