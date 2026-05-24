@@ -13,17 +13,7 @@ Local-first Markdown editor for long-form writing, technical notes, math, and do
 InkStream is a desktop Markdown editor that keeps your documents as plain Markdown while offering a live editing experience for headings, tables, links, code blocks, math, LaTeX, Typst, and Pandoc-based export.
 
 It is designed for writers who need local files, technical formatting, and predictable export rather than a web-only note service.
-
-## Screenshots
-
-<p align="center">
-  <img src="docs/screenshots/inkstream-welcome.png" alt="InkStream welcome page" width="420" />
-</p>
-
-<p align="center">
-  <img src="docs/screenshots/inkstream-editor.png" alt="InkStream editor with live Markdown preview" width="720" />
-</p>
-
+`r`n
 ## Features
 
 | Area | Status | Notes |
@@ -162,3 +152,4 @@ Noncommercial use is permitted under the license terms. Commercial use requires 
 SPDX-License-Identifier: `PolyForm-Noncommercial-1.0.0`
 
 Full license text: https://polyformproject.org/licenses/noncommercial/1.0.0
+
