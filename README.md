@@ -1,130 +1,148 @@
+<div align="center">
+
 # InkStream
 
-InkStream 是一款本地优先的桌面 Markdown 编辑器，面向长文写作、技术笔记、数学内容和多格式文档导出。它提供接近 Typora 的原位预览体验，同时保留 Markdown 源文本作为文件内容，方便长期保存、版本管理和跨工具迁移。
+Local-first Markdown editor for long-form writing, technical notes, math, and document export.
 
-## 产品定位
+[Download](https://github.com/KRPCT/InkStream/releases) · [Features](#features) · [Build](#build-from-source) · [Support](#support-the-project)
 
-- 本地文件优先：文档默认打开、编辑、保存到本机。
-- 所见即所得式 Markdown：在编辑器中直接显示标题、表格、链接、代码块和数学公式的预览效果。
-- 数学与技术写作：支持行内公式、块级公式、LaTeX 片段和 Typst 片段。
-- 文档导入导出：内置 Pandoc，用于导入和导出常见文档格式。
-- 桌面应用体验：包含欢迎页、标签页、文件树、大纲、设置、命令面板和右键菜单。
+</div>
 
-## 已支持能力
+## Overview
 
-| 模块 | 状态 | 说明 |
+InkStream is a desktop Markdown editor that keeps your documents as plain Markdown while offering a live editing experience for headings, tables, links, code blocks, math, LaTeX, Typst, and Pandoc-based export.
+
+It is designed for writers who need local files, technical formatting, and predictable export rather than a web-only note service.
+
+## Features
+
+| Area | Status | Notes |
 | --- | --- | --- |
-| 桌面客户端 | [x] | 基于 Tauri 的桌面应用，可打包发布。 |
-| 欢迎页 | [x] | 新建文件、打开文件、打开文件夹、最近项目、设置入口。 |
-| 文件编辑 | [x] | 标签页、脏状态、保存、另存为、最近文件。 |
-| 文件树 | [x] | 打开文件夹、浏览文件、搜索文件、切换文档。 |
-| 文档大纲 | [x] | 提取标题结构并支持点击跳转。 |
-| 实时预览 | [x] | Markdown 内容可在原位显示渲染结果。 |
-| 源码模式 | [x] | 可切换到 Markdown 源码编辑。 |
-| 表格 | [x] | 支持表格预览、单元格内 Markdown 渲染和回源编辑。 |
-| 超链接 | [x] | 渲染状态下可点击跳转。 |
-| 代码块 | [x] | 支持代码块显示与代码语言识别。 |
-| 数学公式 | [x] | 支持 `$...$`、`$$...$$` 和 fenced `math` 块。 |
-| LaTeX 片段 | [x] | 支持 fenced `latex` 块预览。 |
-| Typst 片段 | [x] | 支持 fenced `typst` 块预览和暗色模式适配。 |
-| 命令面板 | [x] | 支持常用编辑与插入命令。 |
-| 右键菜单 | [x] | 支持复制、粘贴、插入、段落格式和字体格式。 |
-| 设置页 | [x] | 支持主题、编辑器、Markdown/数学、导出和快捷键设置。 |
-| Pandoc 检测 | [x] | 优先使用内置 Pandoc，也支持自定义路径和系统 PATH。 |
-| Pandoc 导入 | [x] | 支持将常见文档格式导入为 Markdown。 |
-| Pandoc 导出 | [x] | 支持 Markdown、HTML、PDF、DOCX、RTF、EPUB、LaTeX、Typst。 |
+| Desktop client | [x] | Tauri desktop app with release builds. |
+| Welcome page | [x] | New file, open file, open folder, recent items, and settings entry. |
+| File editing | [x] | Tabs, dirty state, save, save as, and recent files. |
+| File tree | [x] | Folder browsing, file search, and document switching. |
+| Outline | [x] | Heading extraction and jump navigation. |
+| Live preview | [x] | Markdown content renders in place while preserving source text. |
+| Source mode | [x] | Markdown source editing fallback. |
+| Tables | [x] | Table preview, Markdown inside cells, and source editing. |
+| Links | [x] | Rendered links can be opened directly. |
+| Code blocks | [x] | Code block rendering and language recognition. |
+| Math | [x] | `$...$`, `$$...$$`, and fenced `math` blocks. |
+| LaTeX fragments | [x] | Fenced `latex` block preview. |
+| Typst fragments | [x] | Fenced `typst` block preview with dark mode handling. |
+| Command palette | [x] | Common editing and insertion commands. |
+| Context menu | [x] | Copy, paste, insert, paragraph format, and text format actions. |
+| Settings | [x] | Theme, editor, Markdown/math, export, and shortcut settings. |
+| Pandoc detection | [x] | Bundled Pandoc, custom path, and system PATH detection. |
+| Pandoc import | [x] | Import common document formats into Markdown. |
+| Pandoc export | [x] | Export Markdown, HTML, PDF, DOCX, RTF, EPUB, LaTeX, and Typst. |
+
+## Markdown Coverage
+
+| Content | Status |
+| --- | --- |
+| H1-H6 headings | [x] |
+| Paragraphs | [x] |
+| Bold, italic, underline, strikethrough | [x] |
+| Highlight and inline code | [x] |
+| Block quotes | [x] |
+| Bullet, ordered, and task lists | [x] |
+| Tables | [x] |
+| Links | [x] |
+| Code blocks | [x] |
+| Inline math | [x] |
+| Block math | [x] |
+| Fenced `math` blocks | [x] |
+| Fenced `latex` blocks | [x] |
+| Fenced `typst` blocks | [x] |
+| YAML frontmatter language detection | [x] |
+| Images | [ ] |
+| Footnotes | [ ] |
+| Wiki links | [ ] |
+| Citations | [ ] |
 
 ## TODO
 
-| 功能 | 状态 | 说明 |
+| Feature | Status | Notes |
 | --- | --- | --- |
-| 图片拖放与嵌入 | [ ] | 支持本地图片插入、复制粘贴和资源管理。 |
-| 脚注 | [ ] | 支持 Markdown 脚注渲染与编辑。 |
-| Wiki 链接与反向链接 | [ ] | 支持 `[[page]]` 风格链接和引用追踪。 |
-| 引文管理 | [ ] | 接入 Zotero 引文库和引用插入。 |
-| 知识图谱 | [ ] | 基于文档链接与引用关系生成图谱。 |
-| Git 图谱 | [ ] | 在左侧栏展示真实提交图和文件变更。 |
-| 版本对比 | [ ] | 支持面向文字写作的差异查看。 |
-| 协作发布 | [ ] | 支持更完整的导出模板和发布预设。 |
+| Image insertion | [ ] | Local image insertion, paste support, and resource management. |
+| Footnotes | [ ] | Markdown footnote rendering and editing. |
+| Wiki links | [ ] | `[[page]]` links and backlink tracking. |
+| Citations | [ ] | Zotero library integration and citation insertion. |
+| Knowledge graph | [ ] | Graph view based on document links and citations. |
+| Git workspace | [ ] | Local and cloud-backed version snapshots for writing sessions. |
+| Text diff | [ ] | Writer-friendly document comparison. |
+| Publishing presets | [ ] | Export templates and publishing profiles. |
 
-## Markdown 能力清单
+## Download
 
-| 内容 | 状态 |
-| --- | --- |
-| H1-H6 标题 | [x] |
-| 普通段落 | [x] |
-| 加粗、斜体、下划线、删除线 | [x] |
-| 高亮、行内代码 | [x] |
-| 引用块 | [x] |
-| 无序列表、有序列表、任务列表 | [x] |
-| 表格 | [x] |
-| 超链接 | [x] |
-| 代码块 | [x] |
-| 行内公式 | [x] |
-| 块级公式 | [x] |
-| fenced `math` 块 | [x] |
-| fenced `latex` 块 | [x] |
-| fenced `typst` 块 | [x] |
-| YAML frontmatter 语言识别 | [x] |
-| 图片 | [ ] |
-| 脚注 | [ ] |
-| Wiki 链接 | [ ] |
-| 引文 | [ ] |
+Windows builds are published on the [GitHub Releases](https://github.com/KRPCT/InkStream/releases) page.
 
-## 源码编译
+Available package types:
 
-需要准备：
+- Windows installer: `inkstream_*_x64-setup.exe`
+- Windows MSI: `inkstream_*_x64_en-US.msi`
+- Portable Windows build: `InkStream-*-windows-x64-portable.zip`
 
-- Node.js 22 或更新版本
+## Build From Source
+
+Requirements:
+
+- Node.js 22 or newer
 - pnpm 10.x
 - Rust stable toolchain
 - Windows WebView2 Runtime
 - Git LFS
 
-安装依赖：
+Install dependencies:
 
 ```bash
+cd inkstream
 pnpm install --frozen-lockfile
 ```
 
-启动桌面客户端：
+Run the desktop app in development:
 
 ```bash
 pnpm tauri dev
 ```
 
-构建桌面安装包：
+Build desktop installers:
 
 ```bash
 pnpm tauri build
 ```
 
-## 目录说明
+## Bundled Pandoc
+
+InkStream bundles Pandoc for local document import and export. The executable is stored with Git LFS:
 
 ```text
-.
-├── public/                  # 静态资源和 Typst 预览字体
-├── src/                     # 客户端界面、编辑器、服务和状态管理
-├── src-tauri/               # 桌面后端、应用配置、图标和内置资源
-├── package.json             # 前端依赖和应用脚本
-├── pnpm-lock.yaml           # 前端依赖锁文件
-└── vite.config.ts           # 前端构建配置
+inkstream/src-tauri/resources/pandoc/pandoc.exe
 ```
 
-## 内置 Pandoc
-
-InkStream 内置 Pandoc，用于本地文档导入和导出。该文件通过 Git LFS 管理：
-
-```text
-src-tauri/resources/pandoc/pandoc.exe
-```
-
-克隆仓库后，如果该文件显示为 LFS 指针，请执行：
+After cloning, if the file is still an LFS pointer, run:
 
 ```bash
 git lfs pull
 ```
 
+## Support The Project
+
+If InkStream is useful to you, you can support ongoing development with a small donation.
+
+<p align="center">
+  <img src="docs/sponsor/alipay.jpg" alt="Alipay donation QR code" width="260" />
+  <img src="docs/sponsor/wechat.jpg" alt="WeChat Pay donation QR code" width="260" />
+</p>
+
 ## License
 
-License 尚未确定。
+InkStream is licensed under the PolyForm Noncommercial License 1.0.0.
+
+Noncommercial use is permitted under the license terms. Commercial use requires separate permission from the licensor.
+
+SPDX-License-Identifier: `PolyForm-Noncommercial-1.0.0`
+
+Full license text: https://polyformproject.org/licenses/noncommercial/1.0.0
