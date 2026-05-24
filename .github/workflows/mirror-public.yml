@@ -30,5 +30,11 @@ jobs:
             echo "INKSTREAM_PUBLIC_MIRROR_TOKEN is not configured."
             exit 1
           fi
+          rm -f .github/workflows/mirror-public.yml
+          git add -A .github/workflows
+          git \
+            -c user.name="InkStream Mirror" \
+            -c user.email="inkstream-mirror@example.local" \
+            commit -m "Mirror public main from private source" || true
           git remote add public-mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/KRPCT/InkStream-public.git"
           git push --force public-mirror HEAD:refs/heads/main
